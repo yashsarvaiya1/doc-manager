@@ -1,0 +1,39 @@
+app/
+└── (vivek)/
+    └── vivek/
+        ├── layout.tsx                   # Scoped layout (Navbar)
+        ├── page.tsx                     # Optional redirect or landing page
+        │
+        ├── dashboard/
+        │   └── page.tsx                 # Dashboard screen
+        │
+        ├── document/
+        │   ├── add/
+        │   │   └── page.tsx             # Upload/Add document page
+        │   └── [id]/
+        │       └── page.tsx             # Document details view
+        │
+        ├── components/
+        │   ├── Navbar.tsx
+        │   ├── DocumentCard.tsx
+        │   ├── FileUploader.tsx
+        │   └── FieldInput.tsx
+        │
+        ├── lib/
+        │   ├── api/
+        │   │   ├── index.ts             # Axios instance
+        │   │   └── document.ts          # API logic for documents
+        │   └── types/
+        │       └── document.ts          # TypeScript interfaces
+        │
+        ├── utils/
+        │   └── helpers.ts               # Utility functions
+        │
+        └── styles/
+            └── custom.css               # Optional custom styles
+
+NOTE: as we have custom folder structure we need to import files like this
+
+import Navbar from './components/Navbar'
+import { createDocument } from './lib/api/document'
+
