@@ -109,7 +109,7 @@ export default function HomePage() {
           {/* Task Content */}
           <div className="flex flex-1 space-x-4 overflow-hidden">
             {/* Description Panel */}
-            <section className="w-1/3 bg-white border border-gray-200 rounded-xl p-4 shadow-sm overflow-y-auto">
+            <section className="w-1/4 bg-white border border-gray-200 rounded-xl p-4 shadow-sm overflow-y-auto">
               <h2 className="text-md font-semibold mb-2 text-purple-700">📋 Description:</h2>
               <p className="text-gray-700 leading-relaxed">{activeTask.description}</p>
             </section>
