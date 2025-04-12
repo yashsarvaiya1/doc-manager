@@ -4,6 +4,7 @@ import { useState } from "react";
 import Task1 from "../../(components)/task1";
 import Welcome from "../../(components)/welcome";
 import Task2 from "../../(components)/task2";
+import Task3 from "../../(components)/task3";
 
 export default function PractisePage() {
     const [task, setTask] = useState<string>();
@@ -15,6 +16,9 @@ export default function PractisePage() {
 
             case "task2":
                 return <Task2/>
+
+            case "task3":
+                return <Task3/>
 
             default:
                 return <Welcome />
@@ -43,10 +47,13 @@ export default function PractisePage() {
                                     <button onClick={() => setTask("welcome")}><h1 className="text-2xl">Welcome</h1></button>
                                 </li>
                                 <li>
-                                    <button onClick={() => setTask("task1")}><h1 className="text-2xl">Task 1</h1></button>
+                                    <button onClick={() => setTask("task1")}><h1 className="text-2xl">Task 1 [Counter]</h1></button>
                                 </li> 
                                 <li>
-                                    <button onClick={() => setTask("task2")}><h1 className="text-2xl">Task 2</h1></button>
+                                    <button onClick={() => setTask("task2")}><h1 className="text-2xl">Task 2 [Simple Form]</h1></button>
+                                </li> 
+                                <li>
+                                    <button onClick={() => setTask("task3")}><h1 className="text-2xl">Task 3 [Comment]</h1></button>
                                 </li>                  
                         </div>
                     </div>

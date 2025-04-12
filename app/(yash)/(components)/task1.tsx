@@ -19,7 +19,7 @@ export default function Task1() {
                 <br />
                 <br />
                 <div className="flex gap-20">
-                    <button className="text-4xl font-black border rounded-full p-5" onClick={() => setCount(prevCount => prevCount - 1)}>- </button>
+                    <button className="text-4xl font-black border rounded-full p-5" onClick={() => count < 1 ? null : setCount(prevCount => prevCount - 1)}>- </button>
                     <button className="text-4xl font-black border rounded-full p-5" onClick={() => setCount(prevCount => prevCount + 1)}>+</button>
                 </div>
 
