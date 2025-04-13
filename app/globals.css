@@ -5,6 +5,25 @@
   --foreground: #171717;
 }
 
+
+@layer components {
+  .input {
+    @apply w-full px-3 py-2 border rounded-md text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-400 transition;
+  }
+
+  .label {
+    @apply block text-sm text-gray-700;
+  }
+
+  .button {
+    @apply w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700;
+  }
+
+  .socialButton {
+    @apply w-full flex justify-center items-center gap-2 border py-2 rounded hover:bg-gray-100;
+  }
+}
+
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
