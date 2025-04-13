@@ -58,7 +58,7 @@ export default function Dashboard() {
         <div className="min-h-screen bg-gray-50">
             {/* Header - Exactly matching the screenshot */}
             <div className="bg-white border-b border-gray-200 px-4 py-2">
-                <div className="w-full h-20 px-40 mx-auto flex items-center justify-between">
+                <div className="w-full h-10 px-40 mx-auto flex items-center justify-between">
                     {/* Logo */}
                     <div className="flex items-center">
                         <div className="text-blue-600 mr-2">
@@ -71,7 +71,7 @@ export default function Dashboard() {
                     </div>
 
                     {/* Navigation */}
-                    <div className="flex items-center space-x-6 text-xl">
+                    <div className="flex items-center space-x-6 text-lg">
                         <button className="flex items-center text-gray-600">
                             <svg className="w-5 h-5 mr-1" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M4 13H10C10.55 13 11 12.55 11 12V4C11 3.45 10.55 3 10 3H4C3.45 3 3 3.45 3 4V12C3 12.55 3.45 13 4 13ZM4 21H10C10.55 21 11 20.55 11 20V16C11 15.45 10.55 15 10 15H4C3.45 15 3 15.45 3 16V20C3 20.55 3.45 21 4 21ZM14 21H20C20.55 21 21 20.55 21 20V12C21 11.45 20.55 11 20 11H14C13.45 11 13 11.45 13 12V20C13 20.55 13.45 21 14 21ZM13 4V8C13 8.55 13.45 9 14 9H20C20.55 9 21 8.55 21 8V4C21 3.45 20.55 3 20 3H14C13.45 3 13 3.45 13 4Z" fill="currentColor" />

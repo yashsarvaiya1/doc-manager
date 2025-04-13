@@ -1,17 +1,15 @@
 'use client'
 import { useState } from 'react';
 import Image from 'next/image';
-import { FaGoogle,FaTrash } from 'react-icons/fa';
-import { useRouter } from 'next/navigation'; // Import useRouter
+import { FaGoogle } from 'react-icons/fa';
+import { useRouter } from 'next/navigation';
 
 export default function Login() {
   const [isLogin, setIsLogin] = useState(true);
-  const router = useRouter(); // Initialize the router
+  const router = useRouter();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Here you would typically handle authentication
-    // For now, we'll just redirect to the dashboard
     router.push('/dashboard');
   };
 
@@ -107,7 +105,7 @@ export default function Login() {
           onClick={() => router.push('/dashboard')} // Also redirect on Google button click
           className="w-full flex items-center justify-center gap-3 border border-gray-300 py-2 rounded-md hover:bg-gray-100 transition"
         >
-          <FaGoogle className="text-[#4285F4] w-5 h-5" />
+          <img src="https://www.svgrepo.com/show/475656/google-color.svg" alt="Google" className="w-5 h-5" />
           <span className="text-sm text-gray-700 font-medium">Sign in with Google</span>
         </button>
       </div>
