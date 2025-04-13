@@ -2,16 +2,14 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import { FaGoogle,FaTrash } from 'react-icons/fa';
-import { useRouter } from 'next/navigation'; // Import useRouter
+import { useRouter } from 'next/navigation';
 
 export default function Login() {
   const [isLogin, setIsLogin] = useState(true);
-  const router = useRouter(); // Initialize the router
+  const router = useRouter();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Here you would typically handle authentication
-    // For now, we'll just redirect to the dashboard
     router.push('/dashboard');
   };
 
