@@ -54,7 +54,8 @@ export default function PractisePage() {
                                 </li> 
                                 <li>
                                     <button onClick={() => setTask("task3")}><h1 className="text-2xl">Task 3 [Comment]</h1></button>
-                                </li>                  
+                                </li>
+                                                  
                         </div>
                     </div>
                     {/* output */}
