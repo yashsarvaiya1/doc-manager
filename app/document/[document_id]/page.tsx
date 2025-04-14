@@ -1,12 +1,17 @@
 'use client';
 
 import { useState, use } from 'react';
-import { Download, Mail, Share2, ZoomIn, ZoomOut } from 'lucide-react';
+import { Download, Mail, Share2, ZoomIn, ZoomOut, Copy, ChevronLeft, ChevronRight } from 'lucide-react';
 import Image from 'next/image';
 
 export default function DocumentPage({ params }: { params: Promise<{ document_id: string }> }) {
     const { document_id } = use(params);
     const [zoom, setZoom] = useState(1);
+    const [copiedField, setCopiedField] = useState('');
+    const [viewIndex, setViewIndex] = useState(0);
+
+    const views: Array<'pdf' | 'image' | 'jpeg'> = ['pdf', 'image', 'jpeg'];
+    const currentView = views[viewIndex];
 
     const fileInfo = {
         name: 'contract_2025.pdf',
@@ -27,14 +32,21 @@ export default function DocumentPage({ params }: { params: Promise<{ document_id
     const handleZoomIn = () => setZoom((z) => Math.min(z + 0.1, 2));
     const handleZoomOut = () => setZoom((z) => Math.max(z - 0.1, 0.5));
 
+    const copyToClipboard = (text: string, field: string) => {
+        navigator.clipboard.writeText(text);
+        setCopiedField(field);
+        setTimeout(() => setCopiedField(''), 1500);
+    };
+
+    const handleNext = () => setViewIndex((prev) => (prev + 1) % views.length);
+    const handlePrev = () => setViewIndex((prev) => (prev - 1 + views.length) % views.length);
+
     return (
         <div className="h-screen bg-gray-50 text-sm text-gray-800 flex flex-col">
             {/* Navbar */}
             <div className="flex-shirink px-40 flex items-center justify-between p-4 border-b bg-white">
                 <div className="flex items-center gap-2">
-                    <button className="text-gray-500 hover:text-black">
-                        ←
-                    </button>
+                    <button className="text-gray-500 hover:text-black">←</button>
                     <h1 className="text-lg font-semibold">Project Contract Document : {document_id}</h1>
                 </div>
                 <div className="flex gap-2">
@@ -48,20 +60,58 @@ export default function DocumentPage({ params }: { params: Promise<{ document_id
             </div>
 
             {/* Main Content */}
-            <div className="flex-grow flex p-6 gap-6">
+            <div className="px-50 flex-grow flex p-6 gap-6">
                 {/* Left: Document Preview */}
-                <div className="flex-3 bg-white rounded-lg shadow p-4 flex flex-col justify-between">
-                    <div className="flex-1 flex items-center justify-center overflow-auto border border-gray-200 rounded">
-                        <div style={{ transform: `scale(${zoom})`, transformOrigin: 'center' }}>
-                            <Image
-                                src="/image.png"
-                                alt="Document Preview"
-                                width={600}
-                                height={800}
-                                className="object-contain rounded"
-                            />
+                <div className="flex-2 bg-white rounded-lg shadow p-4 flex flex-col justify-between relative">
+                    {/* Navigation Buttons */}
+                    <button
+                        onClick={handlePrev}
+                        className="absolute left-0 top-1/2 -translate-y-1/2 bg-white border p-2 rounded-r shadow hover:bg-gray-100 z-10"
+                    >
+                        <ChevronLeft size={20} />
+                    </button>
+                    <button
+                        onClick={handleNext}
+                        className="absolute right-0 top-1/2 -translate-y-1/2 bg-white border p-2 rounded-l shadow hover:bg-gray-100 z-10"
+                    >
+                        <ChevronRight size={20} />
+                    </button>
+
+                    {/* Document Content */}
+                    <div className='w-full h-full flex items-center justify-center'>
+                    <div className="w-[600px] h-[800px] flex items-center justify-center overflow-hidden">
+                        <div style={{ transform: `scale(${zoom})`, transformOrigin: 'center' }} className="w-full h-full flex items-center justify-center">
+                            {currentView === 'image' && (
+                                <Image
+                                    src="/image.png"
+                                    alt="Image Preview"
+                                    width={600}
+                                    height={800}
+                                    className="object-contain rounded w-full h-full"
+                                />
+                            )}
+                            {currentView === 'jpeg' && (
+                                <Image
+                                    src="/jatin.jpeg"
+                                    alt="JPEG Preview"
+                                    width={600}
+                                    height={800}
+                                    className="object-contain rounded w-full h-full"
+                                />
+                            )}
+                            {currentView === 'pdf' && (
+                                <iframe
+                                    src="/temp.pdf"
+                                    width="100%"
+                                    height="100%"
+                                    className="rounded border"
+                                ></iframe>
+                            )}
                         </div>
                     </div>
+                    </div>
+
+
                     {/* Footer Controls */}
                     <div className="flex items-center justify-between mt-4">
                         <div className="flex items-center gap-4">
@@ -123,15 +173,27 @@ export default function DocumentPage({ params }: { params: Promise<{ document_id
                     {/* Custom Fields */}
                     <div className="bg-white rounded-lg shadow p-4">
                         <h2 className="text-sm font-semibold mb-2">Custom Fields</h2>
-                        <div className="space-y-2">
-                            <div className="flex justify-between">
-                                <span>Contract ID</span>
-                                <span className="font-medium">{customFields.contractId}</span>
-                            </div>
-                            <div className="flex justify-between">
-                                <span>Client Reference</span>
-                                <span className="font-medium">{customFields.clientRef}</span>
-                            </div>
+                        <div className="space-y-3">
+                            {[
+                                { label: 'Contract ID', value: customFields.contractId, field: 'contractId' },
+                                { label: 'Client Reference', value: customFields.clientRef, field: 'clientRef' },
+                            ].map(({ label, value, field }) => (
+                                <div key={field}>
+                                    <div className="text-xs text-gray-500 mb-1">{label}</div>
+                                    <div className="flex items-center bg-gray-50 px-3 py-2 rounded border justify-between">
+                                        <span className="font-medium">{value}</span>
+                                        <button
+                                            onClick={() => copyToClipboard(value, field)}
+                                            className="text-gray-400 hover:text-black"
+                                        >
+                                            <Copy size={16} />
+                                        </button>
+                                    </div>
+                                    {copiedField === field && (
+                                        <span className="text-xs text-green-500 ml-1">Copied!</span>
+                                    )}
+                                </div>
+                            ))}
                         </div>
                     </div>
                 </div>
