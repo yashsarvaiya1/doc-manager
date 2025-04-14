@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, use } from 'react';
-import { Download, Mail, Share2, ZoomIn, ZoomOut, Copy, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Download, Mail, Share2, ZoomIn, ZoomOut, Copy, ChevronLeft, ChevronRight, ArrowLeft} from 'lucide-react';
 import Image from 'next/image';
 
 export default function DocumentPage({ params }: { params: Promise<{ document_id: string }> }) {
@@ -46,7 +46,9 @@ export default function DocumentPage({ params }: { params: Promise<{ document_id
             {/* Navbar */}
             <div className="flex-shirink px-40 flex items-center justify-between p-4 border-b bg-white">
                 <div className="flex items-center gap-2">
-                    <button className="text-gray-500 hover:text-black">←</button>
+                    <button className="text-gray-500 hover:text-black">
+                      <ArrowLeft className="w-4 h-4" onClick={() => window.location.href = '/dashboard'} />
+                    </button>
                     <h1 className="text-lg font-semibold">Project Contract Document : {document_id}</h1>
                 </div>
                 <div className="flex gap-2">
@@ -66,20 +68,20 @@ export default function DocumentPage({ params }: { params: Promise<{ document_id
                     {/* Navigation Buttons */}
                     <button
                         onClick={handlePrev}
-                        className="absolute left-0 top-1/2 -translate-y-1/2 bg-white border p-2 rounded-r shadow hover:bg-gray-100 z-10"
+                        className="absolute left-0 top-1/2 -translate-y-1/2 bg-white  p-2 rounded-r hover:bg-gray-100 z-10"
                     >
-                        <ChevronLeft size={20} />
+                        <ChevronLeft size={40} />
                     </button>
                     <button
                         onClick={handleNext}
-                        className="absolute right-0 top-1/2 -translate-y-1/2 bg-white border p-2 rounded-l shadow hover:bg-gray-100 z-10"
+                        className="absolute right-0 top-1/2 -translate-y-1/2 bg-white p-2 rounded-l hover:bg-gray-100 z-10"
                     >
-                        <ChevronRight size={20} />
+                        <ChevronRight size={40} />
                     </button>
 
                     {/* Document Content */}
                     <div className='w-full h-full flex items-center justify-center'>
-                    <div className="w-[600px] h-[800px] flex items-center justify-center overflow-hidden">
+                    <div className="w-[50%] h-[90%] flex items-center justify-center overflow-hidden">
                         <div style={{ transform: `scale(${zoom})`, transformOrigin: 'center' }} className="w-full h-full flex items-center justify-center">
                             {currentView === 'image' && (
                                 <Image
