@@ -6,6 +6,12 @@
   --myblue: #2563eb;
 }
 
+@layer base {
+  button {
+    @apply hover:cursor-pointer
+  }
+}
+
 @layer components {
   .form-container {
     @apply bg-white w-full max-w-md rounded-xl shadow p-6 overflow-hidden;

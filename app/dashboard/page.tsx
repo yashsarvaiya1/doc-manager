@@ -67,11 +67,11 @@ export default function Dashboard() {
                                 <path d="M7 18V6C7 5.45 7.196 4.979 7.588 4.587C7.98 4.195 8.45067 4 9 4H15C15.55 4 16.021 4.195 16.413 4.587C16.805 4.979 17 5.45 17 6V18L12 15.5L7 18Z" fill="currentColor" />
                             </svg>
                         </div>
-                        <span className="text-2xl font-black">DocManager</span>
+                        <span className="text-xl font-bold">DocManager</span>
                     </div>
 
                     {/* Navigation */}
-                    <div className="flex items-center space-x-6 text-lg">
+                    <div className="flex items-center space-x-6 text-md">
                         <button className="flex items-center text-gray-600">
                             <svg className="w-5 h-5 mr-1" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M4 13H10C10.55 13 11 12.55 11 12V4C11 3.45 10.55 3 10 3H4C3.45 3 3 3.45 3 4V12C3 12.55 3.45 13 4 13ZM4 21H10C10.55 21 11 20.55 11 20V16C11 15.45 10.55 15 10 15H4C3.45 15 3 15.45 3 16V20C3 20.55 3.45 21 4 21ZM14 21H20C20.55 21 21 20.55 21 20V12C21 11.45 20.55 11 20 11H14C13.45 11 13 11.45 13 12V20C13 20.55 13.45 21 14 21ZM13 4V8C13 8.55 13.45 9 14 9H20C20.55 9 21 8.55 21 8V4C21 3.45 20.55 3 20 3H14C13.45 3 13 3.45 13 4Z" fill="currentColor" />
@@ -125,7 +125,7 @@ export default function Dashboard() {
                             <div
                                 key={doc.id}
                                 className="bg-white rounded-lg shadow-sm border border-gray-200 relative"
-                                onMouseEnter={() => setActiveCard(doc.id  as any)}
+                                onMouseEnter={() => setActiveCard(doc.id as any)}
                                 onMouseLeave={() => setActiveCard(null)}
                             >
                                 <div className="p-4">
@@ -149,29 +149,30 @@ export default function Dashboard() {
                                             </button>
                                         </div>
                                     </div>
+                                    <Link href="/document/1">
+                                        <div
+                                            className="bg-gray-50 rounded-lg py-8 flex justify-center items-center relative"
+                                            onMouseEnter={() => setPreviewDoc(doc.id as any)}
+                                            onMouseLeave={() => setPreviewDoc(null)}
+                                        >
+                                            <Image src={"/image.png"} height={100} width={100} alt='image' />
 
-                                    <div 
-                                        className="bg-gray-50 rounded-lg py-8 flex justify-center items-center relative"
-                                        onMouseEnter={() => setPreviewDoc(doc.id as any)}
-                                        onMouseLeave={() => setPreviewDoc(null)}
-                                    >
-                                        <Image src={"/image.png"} height={100} width={100} alt='image'/>
-                                        
-                                        {/* Document Preview on Hover - Only shows when hovering over the document area */}
-                                        {previewDoc === doc.id && (
-                                            <div className="absolute z-10 top-15 left-12 ml-2 w-[400] h-[400] bg-white rounded-lg shadow-lg border border-gray-200 p-2">
-                                                <div className="w-full h-full relative">
-                                                    <Image
-                                                        src="/image.png"
-                                                        alt="Document preview"
-                                                        fill
-                                                        className="object-contain"
-                                                        priority
-                                                    />
+                                            {/* Document Preview on Hover - Only shows when hovering over the document area */}
+                                            {previewDoc === doc.id && (
+                                                <div className="absolute z-10 top-15 left-12 ml-2 w-[400] h-[400] bg-white rounded-lg shadow-lg border border-gray-200 p-2">
+                                                    <div className="w-full h-full relative">
+                                                        <Image
+                                                            src="/image.png"
+                                                            alt="Document preview"
+                                                            fill
+                                                            className="object-contain"
+                                                            priority
+                                                        />
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        )}
-                                    </div>
+                                            )}
+                                        </div>
+                                    </Link>
 
                                     <div className="mt-4 space-y-2">
                                         <div className="flex justify-between">
@@ -180,11 +181,10 @@ export default function Dashboard() {
                                         </div>
                                         <div className="flex justify-between">
                                             <span className="text-sm text-gray-500">Expiry Date</span>
-                                            <span className={`text-sm font-medium ${
-                                                doc.expiry === "Mar 15, 2025" ? "text-red-500" :
-                                                doc.expiry === "Apr 30, 2025" ? "text-orange-500" :
-                                                "text-gray-700"
-                                            }`}>
+                                            <span className={`text-sm font-medium ${doc.expiry === "Mar 15, 2025" ? "text-red-500" :
+                                                    doc.expiry === "Apr 30, 2025" ? "text-orange-500" :
+                                                        "text-gray-700"
+                                                }`}>
                                                 {doc.expiry}
                                             </span>
                                         </div>

@@ -46,8 +46,8 @@ export default function DocumentPage({ params }: { params: Promise<{ document_id
             {/* Navbar */}
             <div className="flex-shirink px-40 flex items-center justify-between p-4 border-b bg-white">
                 <div className="flex items-center gap-2">
-                    <button className="text-gray-500 hover:text-black">
-                      <ArrowLeft className="w-4 h-4" onClick={() => window.location.href = '/dashboard'} />
+                    <button className="text-black">
+                      <ArrowLeft className="w-5 h-5" onClick={() => window.location.href = '/dashboard'} />
                     </button>
                     <h1 className="text-lg font-semibold">Project Contract Document : {document_id}</h1>
                 </div>
@@ -70,13 +70,13 @@ export default function DocumentPage({ params }: { params: Promise<{ document_id
                         onClick={handlePrev}
                         className="absolute left-0 top-1/2 -translate-y-1/2 bg-white  p-2 rounded-r hover:bg-gray-100 z-10"
                     >
-                        <ChevronLeft size={40} />
+                        <ChevronLeft size={30} />
                     </button>
                     <button
                         onClick={handleNext}
                         className="absolute right-0 top-1/2 -translate-y-1/2 bg-white p-2 rounded-l hover:bg-gray-100 z-10"
                     >
-                        <ChevronRight size={40} />
+                        <ChevronRight size={30} />
                     </button>
 
                     {/* Document Content */}
