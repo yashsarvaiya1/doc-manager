@@ -7,20 +7,40 @@
 }
 
 @layer components {
-  .input {
-    @apply w-full px-3 py-2 border rounded-md text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-400 transition;
+  .form-container {
+    @apply bg-white w-full max-w-md rounded-xl shadow p-6 overflow-hidden;
   }
 
-  .label {
-    @apply block text-sm text-gray-700;
+  .tab-button {
+    @apply text-sm font-semibold pb-2 transition-all;
+  }
+  .tab-active {
+    @apply text-blue-600 border-b-2 border-blue-600;
+  }
+  .tab-inactive {
+    @apply text-gray-400;
   }
 
-  .button {
-    @apply w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700;
+  .input-box {
+    @apply mt-1 w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500;
   }
-
-  .socialButton {
-    @apply w-full flex justify-center items-center gap-2 border py-2 rounded hover:bg-gray-100;
+  .error-text {
+    @apply text-red-500 text-sm;
+  }
+  .primary-button {
+    @apply w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition;
+  }
+  .divider {
+    @apply flex items-center gap-2 my-4;
+  }
+  .google-button {
+    @apply w-full flex items-center justify-center gap-3 border border-gray-300 py-2 rounded-md hover:bg-gray-100 transition;
+  }
+  .disclaimer {
+    @apply text-xs text-gray-500 mt-6;
+  }
+  .link {
+    @apply text-blue-600 hover:underline;
   }
 }
 
