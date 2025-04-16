@@ -54,20 +54,20 @@
     @apply text-sm font-semibold pb-2 transition-all;
   }
   .tab-active {
-    @apply text-blue-600 border-b-2 border-blue-600;
+    @apply text-[#068190] border-b-2 border-[#068190];
   }
   .tab-inactive {
     @apply text-gray-400;
   }
 
   .input-box {
-    @apply mt-1 w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500;
+    @apply mt-1 w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-[#068190] focus:border-[#068190];
   }
   .error-text {
     @apply text-red-500 text-sm;
   }
   .primary-button {
-    @apply w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition;
+    @apply w-full bg-[#068190] text-white py-2 px-4 rounded-md hover:bg-[#068190] transition;
   }
   .divider {
     @apply flex items-center gap-2 my-4;
@@ -79,7 +79,7 @@
     @apply text-xs text-gray-500 mt-6;
   }
   .link {
-    @apply text-blue-600 hover:underline;
+    @apply text-[#068190] hover:underline;
   }
 }
 

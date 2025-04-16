@@ -3,6 +3,18 @@ import { useState } from 'react';
 import Image from 'next/image';
 import { FiSearch, FiPlus, FiShare2, FiEdit2, FiTrash2, FiLogOut } from 'react-icons/fi';
 import Link from 'next/link';
+import toast from 'react-hot-toast';
+
+
+const toastHandle = () => {
+    toast.success('You did it!');
+    toast.error('error');
+    toast.custom(<>
+        <div className='p-5 border-2 border-[#068190] text-md text-[#068190] '>
+            my custome toast
+        </div>
+    </>);
+};
 
 export default function Dashboard() {
     const [previewDoc, setPreviewDoc] = useState(null);
@@ -45,8 +57,8 @@ export default function Dashboard() {
                 );
             case 'word':
                 return (
-                    <div className="bg-blue-100 rounded-lg p-2 w-12 h-16 flex items-center justify-center">
-                        <div className="text-blue-500 font-bold">W</div>
+                    <div className="bg-[#068190] rounded-lg p-2 w-12 h-16 flex items-center justify-center">
+                        <div className="text-[#068190] font-bold">W</div>
                     </div>
                 );
             default:
@@ -61,13 +73,13 @@ export default function Dashboard() {
                 <div className="w-full h-10 px-40 mx-auto flex items-center justify-between">
                     {/* Logo */}
                     <div className="flex items-center">
-                        <div className="text-blue-600 mr-2">
+                        {/* <div className="text-blue-600 mr-2">
                             <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <rect width="24" height="24" rx="4" fill="currentColor" fillOpacity="0.1" />
                                 <path d="M7 18V6C7 5.45 7.196 4.979 7.588 4.587C7.98 4.195 8.45067 4 9 4H15C15.55 4 16.021 4.195 16.413 4.587C16.805 4.979 17 5.45 17 6V18L12 15.5L7 18Z" fill="currentColor" />
                             </svg>
-                        </div>
-                        <span className="text-xl font-bold">DocManager</span>
+                        </div> */}
+                        <div className=""><Image src={'/Navbar_Logo.png'} className='object-contain' width={100} height={100} alt='DocSyncX' /></div>
                     </div>
 
                     {/* Navigation */}
@@ -110,11 +122,11 @@ export default function Dashboard() {
                                     className="pl-10 pr-4 py-2 w-64 border border-gray-300 rounded-lg focus:outline-none"
                                 />
                             </div>
-                            <button className="bg-blue-600 text-white px-4 py-2 rounded-lg flex items-center space-x-2">
+                            <button className="bg-[#068190] text-white px-4 py-2 rounded-lg flex items-center space-x-2">
                                 <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M19 13H13V19H11V13H5V11H11V5H13V11H19V13Z" fill="currentColor" />
                                 </svg>
-                                <Link href="/dashboard/add"><span>New Document</span></Link>
+                                <Link href="/document/add"><span>New Document</span></Link>
                             </button>
                         </div>
                     </div>
@@ -155,14 +167,14 @@ export default function Dashboard() {
                                             onMouseEnter={() => setPreviewDoc(doc.id as any)}
                                             onMouseLeave={() => setPreviewDoc(null)}
                                         >
-                                            <Image src={"/image.png"} height={100} width={100} alt='image' />
+                                            <Image src={"/Login_Register_Logo.png"} height={100} width={100} alt='image' />
 
                                             {/* Document Preview on Hover - Only shows when hovering over the document area */}
                                             {previewDoc === doc.id && (
-                                                <div className="absolute z-10 top-15 left-12 ml-2 w-[400] h-[400] bg-white rounded-lg shadow-lg border border-gray-200 p-2">
+                                                <div className="absolute z-10 top-15 left-12 ml-2 w-[400] h-[300] bg-white rounded-lg shadow-lg border border-gray-200 p-2">
                                                     <div className="w-full h-full relative">
                                                         <Image
-                                                            src="/image.png"
+                                                            src="/Login_Register_Logo.png"
                                                             alt="Document preview"
                                                             fill
                                                             className="object-contain"
@@ -177,7 +189,7 @@ export default function Dashboard() {
                                     <div className="mt-4 space-y-2">
                                         <div className="flex justify-between">
                                             <span className="text-sm text-gray-500">Document ID</span>
-                                            <span className="text-sm font-medium text-blue-600">{doc.id}</span>
+                                            <span className="text-sm font-medium text-[#068190]">{doc.id}</span>
                                         </div>
                                         <div className="flex justify-between">
                                             <span className="text-sm text-gray-500">Expiry Date</span>
@@ -192,6 +204,7 @@ export default function Dashboard() {
                                 </div>
                             </div>
                         ))}
+                        <button className='flex border p-4 border-[#068190] justify-center items-center text-[#068190]' onClick={toastHandle}>Make Toast</button>
                     </div>
                 </div>
             </main>

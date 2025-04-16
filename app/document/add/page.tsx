@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect } from 'react'
 import { Trash, Plus, Upload } from 'lucide-react'
 import clsx from 'clsx'
+import { GrView } from 'react-icons/gr'
 
 export default function AddDocumentPage() {
   const [tags, setTags] = useState<string[]>([])
@@ -87,12 +88,12 @@ export default function AddDocumentPage() {
               onClick={() => inputRef.current?.click()}
               className={clsx(
                 "border-2 border-dashed rounded-md p-6 text-center cursor-pointer transition",
-                dragActive ? "border-blue-400 bg-blue-50" : "border-gray-300 bg-white"
+                dragActive ? "border-[#068190] bg-[#068190]" : "border-gray-300 bg-white"
               )}
             >
-              <Upload className="mx-auto mb-2 text-blue-500" />
+              <Upload className="mx-auto mb-2 text-[#068190]" />
               <p className="text-gray-600 text-sm">
-                <span className="text-blue-600 font-medium">Upload files</span> or drag and drop
+                <span className="text-[#068190] font-medium">Upload files</span> or drag and drop
               </p>
               <p className="text-xs text-gray-400">PDF, JPG, PNG up to 10MB each</p>
               <input
@@ -133,10 +134,10 @@ export default function AddDocumentPage() {
                         {isPDF || isImage ? (
                           <button
                             type="button"
-                            className="hover:text-blue-600 transition"
+                            className="hover:text-[#068190] transition"
                             onClick={() => window.open(URL.createObjectURL(file), '_blank')}
                           >
-                            👁️
+                            <GrView className='w-4 h-4'/>
                           </button>
                         ) : null}
                         <button
@@ -144,7 +145,7 @@ export default function AddDocumentPage() {
                           className="text-red-500 hover:text-red-700 transition"
                           onClick={() => removeFile(idx)}
                         >
-                          🗑️
+                          <Trash className="w-4 h-4" />
                         </button>
                       </div>
                     </li>
@@ -161,7 +162,7 @@ export default function AddDocumentPage() {
               <button
                 type="button"
                 onClick={addCustomField}
-                className="text-sm px-3 py-1 bg-blue-50 border border-blue-500 text-blue-600 rounded-md hover:bg-blue-100"
+                className="text-sm px-3 py-1 bg-[#068190] border border-[#068190] text-white rounded-md hover:bg-[#068190]"
               >
                 <Plus className="w-4 h-4 inline-block mr-1" />
                 Add Field
@@ -220,7 +221,7 @@ export default function AddDocumentPage() {
               <button
                 type="button"
                 onClick={addTag}
-                className="text-sm px-3 py-2 border border-blue-500 text-blue-600 rounded-md hover:bg-blue-100"
+                className="text-sm px-3 py-2 border border-[#068190] text-[#068190] rounded-md hover:bg-[#068190] hover:text-white "
               >
                 <Plus className="w-4 h-4" />
               </button>
@@ -229,12 +230,12 @@ export default function AddDocumentPage() {
               {tags.map(tag => (
                 <span
                   key={tag}
-                  className="flex items-center bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-xs"
+                  className="flex items-center bg-[#068190] text-[#068190] px-3 py-1 rounded-full text-xs"
                 >
                   {tag}
                   <button
                     onClick={() => removeTag(tag)}
-                    className="ml-1 text-blue-600 hover:text-red-500"
+                    className="ml-1 text-[#068190] hover:text-red-500"
                   >
                     ×
                   </button>
@@ -263,7 +264,7 @@ export default function AddDocumentPage() {
             </button>
             <button
               type="submit"
-              className="px-6 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
+              className="px-6 py-2 bg-[#068190] text-white rounded-md hover:bg-[#068190]"
             >
               Save Document
             </button>

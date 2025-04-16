@@ -55,7 +55,7 @@ export default function DocumentPage({ params }: { params: Promise<{ document_id
                     <button className="flex items-center gap-1 px-3 py-1.5 text-sm border rounded hover:bg-gray-100">
                         <Mail size={16} /> Send Email
                     </button>
-                    <button className="flex items-center gap-1 px-3 py-1.5 text-sm text-white bg-blue-600 rounded hover:bg-blue-700">
+                    <button className="flex items-center gap-1 px-3 py-1.5 text-sm text-white bg-[#068190] rounded hover:bg-[#068190]">
                         <Share2 size={16} /> Share Link
                     </button>
                 </div>
@@ -162,7 +162,7 @@ export default function DocumentPage({ params }: { params: Promise<{ document_id
                                         {file.type === 'pdf' ? (
                                             <span className="text-red-500">📄</span>
                                         ) : (
-                                            <span className="text-blue-500">🖼️</span>
+                                            <span className="text-[#068190]">🖼️</span>
                                         )}
                                         <span>{file.name}</span>
                                     </div>

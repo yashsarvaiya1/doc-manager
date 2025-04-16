@@ -38,8 +38,8 @@ export default function Login() {
   return (
     <main className="min-h-screen bg-gray-50 flex flex-col items-center justify-center px-4">
       <div className="flex flex-col items-center mb-6">
-        <Image src="/image.png" width={48} height={48} alt="Folder logo" />
-        <h1 className="text-3xl font-bold text-gray-800 mt-2">DocuVault</h1>
+        <Image src="/Login_Register_Logo.png" width={150} height={150} alt="Folder logo" />
+        {/* <h1 className="text-3xl font-bold text-gray-800 mt-2">DocSyncX</h1> */}
         <p className="text-gray-500">Your secure document management solution</p>
       </div>
 
