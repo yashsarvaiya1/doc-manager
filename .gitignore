@@ -12,7 +12,8 @@
 
 # testing
 /coverage
-
+/(yash)
+/(vivek)
 # next.js
 /.next/
 /out/

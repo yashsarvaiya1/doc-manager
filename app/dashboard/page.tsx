@@ -1,6 +1,8 @@
 'use client'
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 import Image from 'next/image';
+import Cookies from 'js-cookie';
 import { FiSearch, FiPlus, FiShare2, FiEdit2, FiTrash2, FiLogOut } from 'react-icons/fi';
 import Link from 'next/link';
 import toast from 'react-hot-toast';
@@ -8,17 +10,39 @@ import toast from 'react-hot-toast';
 
 const toastHandle = () => {
     toast.success('You did it!');
-    toast.error('error');
+
     toast.custom(<>
         <div className='p-5 border-2 border-[#068190] text-md text-[#068190] '>
             my custome toast
         </div>
     </>);
+
 };
 
 export default function Dashboard() {
     const [previewDoc, setPreviewDoc] = useState(null);
     const [activeCard, setActiveCard] = useState(null);
+    const router = useRouter();
+
+
+    useEffect(() => {
+        const token = Cookies.get('access_token');
+        if (!token) {
+            toast.error('Access token not found. Redirecting to login...');
+            router.push('/');
+        }
+    }, []);
+
+    const handleLogout = () => {
+        Cookies.remove('access_token');
+        toast.success('Logged out successfully!');
+        router.push('/');
+    };
+
+    const clearToken = () => {
+        Cookies.remove('access_token');
+        toast('Access token cleared! Refresh to test redirect.');
+    };
 
     const documents = [
         {
@@ -79,24 +103,14 @@ export default function Dashboard() {
                                 <path d="M7 18V6C7 5.45 7.196 4.979 7.588 4.587C7.98 4.195 8.45067 4 9 4H15C15.55 4 16.021 4.195 16.413 4.587C16.805 4.979 17 5.45 17 6V18L12 15.5L7 18Z" fill="currentColor" />
                             </svg>
                         </div> */}
-                        <div className=""><Image src={'/Navbar_Logo.png'} className='object-contain' width={100} height={100} alt='DocSyncX' /></div>
+                        <a href="/dashboard" className="link"><div className=""><Image src={'/Navbar_Logo.png'} className='object-contain' width={100} height={100} alt='DocSyncX' /></div></a>
+
                     </div>
 
                     {/* Navigation */}
                     <div className="flex items-center space-x-6 text-md">
-                        <button className="flex items-center text-gray-600">
-                            <svg className="w-5 h-5 mr-1" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M4 13H10C10.55 13 11 12.55 11 12V4C11 3.45 10.55 3 10 3H4C3.45 3 3 3.45 3 4V12C3 12.55 3.45 13 4 13ZM4 21H10C10.55 21 11 20.55 11 20V16C11 15.45 10.55 15 10 15H4C3.45 15 3 15.45 3 16V20C3 20.55 3.45 21 4 21ZM14 21H20C20.55 21 21 20.55 21 20V12C21 11.45 20.55 11 20 11H14C13.45 11 13 11.45 13 12V20C13 20.55 13.45 21 14 21ZM13 4V8C13 8.55 13.45 9 14 9H20C20.55 9 21 8.55 21 8V4C21 3.45 20.55 3 20 3H14C13.45 3 13 3.45 13 4Z" fill="currentColor" />
-                            </svg>
-                            Dashboard
-                        </button>
-                        <button className="flex items-center text-gray-600">
-                            <svg className="w-5 h-5 mr-1" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M19 13H13V19H11V13H5V11H11V5H13V11H19V13Z" fill="currentColor" />
-                            </svg>
-                            Add Document
-                        </button>
-                        <button className="flex items-center text-gray-600">
+
+                        <button onClick={handleLogout} className="flex items-center text-gray-600">
                             <svg className="w-5 h-5 mr-1" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M17 7L15.59 8.41L18.17 11H8V13H18.17L15.59 15.58L17 17L22 12L17 7ZM4 5H12V3H4C2.9 3 2 3.9 2 5V19C2 20.1 2.9 21 4 21H12V19H4V5Z" fill="currentColor" />
                             </svg>
@@ -194,8 +208,8 @@ export default function Dashboard() {
                                         <div className="flex justify-between">
                                             <span className="text-sm text-gray-500">Expiry Date</span>
                                             <span className={`text-sm font-medium ${doc.expiry === "Mar 15, 2025" ? "text-red-500" :
-                                                    doc.expiry === "Apr 30, 2025" ? "text-orange-500" :
-                                                        "text-gray-700"
+                                                doc.expiry === "Apr 30, 2025" ? "text-orange-500" :
+                                                    "text-gray-700"
                                                 }`}>
                                                 {doc.expiry}
                                             </span>
@@ -205,6 +219,7 @@ export default function Dashboard() {
                             </div>
                         ))}
                         <button className='flex border p-4 border-[#068190] justify-center items-center text-[#068190]' onClick={toastHandle}>Make Toast</button>
+                        <button className='flex border p-4 border-[#068190] justify-center items-center text-[#068190]' onClick={clearToken}>Clear Token</button>
                     </div>
                 </div>
             </main>
