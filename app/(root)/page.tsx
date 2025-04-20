@@ -18,6 +18,11 @@ export default function Login() {
   const [isLogin, setIsLogin] = useState(true);
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
+
+
 
   useEffect(() => {
     const token = Cookies.get('access_token');
@@ -171,35 +176,54 @@ export default function Login() {
             {errors.email && <p className="error-text">{errors.email.message}</p>}
           </div>
 
-          <div>
+          <div className="relative">
             <label className="block text-sm font-medium text-gray-700">Password</label>
             <input
-              type="password"
+              type={showPassword ? 'text' : 'password'}
               placeholder="********"
+              autoComplete="new-password"
               {...register('password', { required: 'Password is required' })}
-              className="input-box"
+              className="input-box pr-10"
             />
+            <button
+              type="button"
+              onClick={() => setShowPassword(!showPassword)}
+              className="absolute right-3 top-9 text-gray-500"
+              tabIndex={-1}
+            >
+              {showPassword ? '🙈' : '👁️'}
+            </button>
             {errors.password && <p className="error-text">{errors.password.message}</p>}
           </div>
 
+
           {!isLogin && (
-            <div>
+            <div className="relative">
               <label className="block text-sm font-medium text-gray-700">Confirm Password</label>
               <input
-                type="password"
+                type={showConfirmPassword ? 'text' : 'password'}
                 placeholder="********"
                 {...register('confirmPassword', {
                   required: 'Please confirm your password',
                   validate: (value) =>
                     value === password || 'Passwords do not match',
                 })}
-                className="input-box"
+                className="input-box pr-10"
               />
+              <button
+                type="button"
+                onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                className="absolute right-3 top-9 text-gray-500"
+                tabIndex={-1}
+              >
+                {showConfirmPassword ? '🙈' : '👁️'}
+              </button>
               {errors.confirmPassword && (
                 <p className="error-text">{errors.confirmPassword.message}</p>
               )}
             </div>
           )}
+
 
           {isLogin && (
             <div className="flex items-center justify-between text-sm text-gray-600">

@@ -45,6 +45,18 @@
   }
 }
 
+@layer utilities {
+  input[type='password']::-ms-reveal,
+  input[type='password']::-ms-clear {
+    display: none;
+  }
+
+  input[type='password']::-webkit-credentials-auto-fill-button {
+    visibility: hidden;
+    display: none !important;
+  }
+}
+
 @layer components {
   .form-container {
     @apply bg-white w-full max-w-md rounded-xl shadow p-6 overflow-hidden;
