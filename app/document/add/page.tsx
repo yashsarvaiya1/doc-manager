@@ -6,7 +6,11 @@ import clsx from 'clsx'
 import { GrView } from 'react-icons/gr'
 import { useRouter } from 'next/navigation';
 
-export default function AddDocumentPage() {
+interface AddDocumentPageProps {
+  onClose?: () => void;
+}
+
+export default function AddDocumentPage({ onClose }: AddDocumentPageProps) {
   const [tags, setTags] = useState<string[]>([])
   const [inputTag, setInputTag] = useState('')
   const [customFields, setCustomFields] = useState([{ name: '', value: '' }])
@@ -73,7 +77,7 @@ export default function AddDocumentPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 py-12 px-4">
+    <div className="min-h-screen py-4">
       <div className="max-w-3xl mx-auto bg-white rounded-xl shadow-lg p-8 overflow-hidden">
         <h1 className="text-2xl font-bold text-gray-800 mb-1">Add New Document</h1>
         <p className="text-sm text-gray-500 mb-6">Upload and configure your document details below</p>
@@ -259,7 +263,7 @@ export default function AddDocumentPage() {
           {/* Footer */}
           <div className="flex justify-end items-center gap-4 pt-4">
             <button
-            onClick={()=>router.push("/dashboard")}
+              onClick={onClose}
               type="button"
               className="px-6 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-100"
             >

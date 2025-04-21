@@ -6,6 +6,8 @@ import Cookies from 'js-cookie';
 import { FiSearch, FiPlus, FiShare2, FiEdit2, FiTrash2, FiLogOut } from 'react-icons/fi';
 import Link from 'next/link';
 import toast from 'react-hot-toast';
+import AddDocumentPage from '../document/add/page';
+import { FaCross } from 'react-icons/fa';
 
 
 const toastHandle = () => {
@@ -16,13 +18,39 @@ const toastHandle = () => {
             my custome toast
         </div>
     </>);
+};
 
+const Modal = ({
+    isOpen,
+    onClose,
+    children
+}: {
+    isOpen: boolean;
+    onClose: () => void;
+    children: React.ReactNode;
+}) => {
+    if (!isOpen) return null;
+
+    return (
+        <div className="fixed inset-0 bg-white/30 backdrop-blur-sm flex items-center justify-center z-50 overflow-y-scroll">
+            <div className="max-w-3xl w-full h-full relative p-5">
+                <button
+                    onClick={onClose}
+                    className="absolute top-3 right-0  hover:text-black"
+                >
+                    <FiPlus className="rotate-45 w-6 h-6" />
+                </button>
+                {children}
+            </div>
+        </div>
+    );
 };
 
 export default function Dashboard() {
     const [previewDoc, setPreviewDoc] = useState(null);
     const [activeCard, setActiveCard] = useState(null);
     const router = useRouter();
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
 
     useEffect(() => {
@@ -103,7 +131,7 @@ export default function Dashboard() {
                                 <path d="M7 18V6C7 5.45 7.196 4.979 7.588 4.587C7.98 4.195 8.45067 4 9 4H15C15.55 4 16.021 4.195 16.413 4.587C16.805 4.979 17 5.45 17 6V18L12 15.5L7 18Z" fill="currentColor" />
                             </svg>
                         </div> */}
-                        <a href="/dashboard" className="link"><div className=""><Image src={'/Navbar_Logo.png'} className='object-cover'  width={150} height={150} alt='DocSyncX' /></div></a>
+                        <a href="/dashboard" className="link"><div className=""><Image src={'/Navbar_Logo.png'} className='object-cover' width={150} height={150} alt='DocSyncX' /></div></a>
 
                     </div>
 
@@ -220,9 +248,14 @@ export default function Dashboard() {
                         ))}
                         <button className='flex border p-4 border-[#068190] justify-center items-center text-[#068190]' onClick={toastHandle}>Make Toast</button>
                         <button className='flex border p-4 border-[#068190] justify-center items-center text-[#068190]' onClick={clearToken}>Clear Token</button>
+                        <button className='flex border p-4 border-[#068190] justify-center items-center text-[#068190]' onClick={() => setIsModalOpen(true)}>Open Model</button>
+                        <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
+                            <AddDocumentPage onClose={() => setIsModalOpen(false)} />
+                        </Modal>
                     </div>
                 </div>
             </main>
         </div>
     );
 }
+
