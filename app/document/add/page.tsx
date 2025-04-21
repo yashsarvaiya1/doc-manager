@@ -4,6 +4,7 @@ import { useState, useRef, useEffect } from 'react'
 import { Trash, Plus, Upload } from 'lucide-react'
 import clsx from 'clsx'
 import { GrView } from 'react-icons/gr'
+import { useRouter } from 'next/navigation';
 
 export default function AddDocumentPage() {
   const [tags, setTags] = useState<string[]>([])
@@ -12,6 +13,7 @@ export default function AddDocumentPage() {
   const [dragActive, setDragActive] = useState(false)
   const [uploadedFiles, setUploadedFiles] = useState<File[]>([])
   const inputRef = useRef<HTMLInputElement>(null)
+  const router = useRouter();
 
   const addTag = () => {
     const newTag = inputTag.trim()
@@ -257,6 +259,7 @@ export default function AddDocumentPage() {
           {/* Footer */}
           <div className="flex justify-end items-center gap-4 pt-4">
             <button
+            onClick={()=>router.push("/dashboard")}
               type="button"
               className="px-6 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-100"
             >
