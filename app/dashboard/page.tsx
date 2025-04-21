@@ -96,14 +96,14 @@ export default function Dashboard() {
             <div className="bg-white border-b border-gray-200 px-4 py-2">
                 <div className="w-full h-10 px-40 mx-auto flex items-center justify-between">
                     {/* Logo */}
-                    <div className="flex items-center">
+                    <div className="flex items-center justify-center ">
                         {/* <div className="text-blue-600 mr-2">
                             <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <rect width="24" height="24" rx="4" fill="currentColor" fillOpacity="0.1" />
                                 <path d="M7 18V6C7 5.45 7.196 4.979 7.588 4.587C7.98 4.195 8.45067 4 9 4H15C15.55 4 16.021 4.195 16.413 4.587C16.805 4.979 17 5.45 17 6V18L12 15.5L7 18Z" fill="currentColor" />
                             </svg>
                         </div> */}
-                        <a href="/dashboard" className="link"><div className=""><Image src={'/Navbar_Logo.png'} className='object-contain' width={100} height={100} alt='DocSyncX' /></div></a>
+                        <a href="/dashboard" className="link"><div className=""><Image src={'/Navbar_Logo.png'} className='object-cover'  width={150} height={150} alt='DocSyncX' /></div></a>
 
                     </div>
 

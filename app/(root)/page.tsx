@@ -5,7 +5,7 @@ import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import Cookies from 'js-cookie';
 import toast, { Toaster } from 'react-hot-toast';
-import { FaGoogle } from 'react-icons/fa';
+import { FaEye, FaEyeSlash, FaGoogle } from 'react-icons/fa';
 
 type FormData = {
   name?: string;
@@ -191,7 +191,7 @@ export default function Login() {
               className="absolute right-3 top-9 text-gray-500"
               tabIndex={-1}
             >
-              {showPassword ? '🙈' : '👁️'}
+              {showPassword ? <FaEyeSlash /> : <FaEye /> }
             </button>
             {errors.password && <p className="error-text">{errors.password.message}</p>}
           </div>
@@ -216,7 +216,7 @@ export default function Login() {
                 className="absolute right-3 top-9 text-gray-500"
                 tabIndex={-1}
               >
-                {showConfirmPassword ? '🙈' : '👁️'}
+                {showConfirmPassword ? <FaEyeSlash /> : <FaEye />}
               </button>
               {errors.confirmPassword && (
                 <p className="error-text">{errors.confirmPassword.message}</p>

@@ -1,12 +1,17 @@
 'use client';
 
 import { useState, use } from 'react';
-import { Download, Mail, Share2, ZoomIn, ZoomOut, Copy, ChevronLeft, ChevronRight, ArrowLeft} from 'lucide-react';
+import { Download, Mail, Share2, ZoomIn, ZoomOut, Copy, ChevronLeft, ChevronRight, ArrowLeft } from 'lucide-react';
 import Image from 'next/image';
+import toast from 'react-hot-toast';
+import Cookies from 'js-cookie';
+import { useRouter } from 'next/navigation';
+
 
 export default function DocumentPage({ params }: { params: Promise<{ document_id: string }> }) {
     const { document_id } = use(params);
     const [zoom, setZoom] = useState(1);
+    const router = useRouter();
     const [copiedField, setCopiedField] = useState('');
     const [viewIndex, setViewIndex] = useState(0);
 
@@ -17,6 +22,11 @@ export default function DocumentPage({ params }: { params: Promise<{ document_id
         name: 'contract_2025.pdf',
         size: '2.4 MB',
         created: 'Jan 15, 2025',
+    };
+    const handleLogout = () => {
+        Cookies.remove('access_token');
+        toast.success('Logged out successfully!');
+        router.push('/');
     };
 
     const attachedFiles = [
@@ -43,11 +53,37 @@ export default function DocumentPage({ params }: { params: Promise<{ document_id
 
     return (
         <div className="h-screen bg-gray-50 text-sm text-gray-800 flex flex-col">
-            {/* Navbar */}
+            <div>
+                <div className="w-full h-15 px-40 bg-white mx-auto flex items-center justify-between">
+                    {/* Logo */}
+                    <div className="flex items-center justify-center ">
+                        {/* <div className="text-blue-600 mr-2">
+                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect width="24" height="24" rx="4" fill="currentColor" fillOpacity="0.1" />
+                                <path d="M7 18V6C7 5.45 7.196 4.979 7.588 4.587C7.98 4.195 8.45067 4 9 4H15C15.55 4 16.021 4.195 16.413 4.587C16.805 4.979 17 5.45 17 6V18L12 15.5L7 18Z" fill="currentColor" />
+                            </svg>
+                        </div> */}
+                        <a href="/dashboard" className="link"><div className=""><Image src={'/Navbar_Logo.png'} className='object-cover' width={150} height={150} alt='DocSyncX' /></div></a>
+
+                    </div>
+
+                    {/* Navigation */}
+                    <div className="flex items-center space-x-6 text-md">
+
+                        <button onClick={handleLogout} className="flex items-center text-gray-600">
+                            <svg className="w-5 h-5 mr-1" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M17 7L15.59 8.41L18.17 11H8V13H18.17L15.59 15.58L17 17L22 12L17 7ZM4 5H12V3H4C2.9 3 2 3.9 2 5V19C2 20.1 2.9 21 4 21H12V19H4V5Z" fill="currentColor" />
+                            </svg>
+                            Logout
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <hr />
             <div className="flex-shirink px-40 flex items-center justify-between p-4 border-b bg-white">
                 <div className="flex items-center gap-2">
                     <button className="text-black">
-                      <ArrowLeft className="w-5 h-5" onClick={() => window.location.href = '/dashboard'} />
+                        <ArrowLeft className="w-5 h-5" onClick={() => window.location.href = '/dashboard'} />
                     </button>
                     <h1 className="text-lg font-semibold">Project Contract Document : {document_id}</h1>
                 </div>
@@ -81,36 +117,36 @@ export default function DocumentPage({ params }: { params: Promise<{ document_id
 
                     {/* Document Content */}
                     <div className='w-full h-full flex items-center justify-center'>
-                    <div className="w-[50%] h-[90%] flex items-center justify-center overflow-hidden">
-                        <div style={{ transform: `scale(${zoom})`, transformOrigin: 'center' }} className="w-full h-full flex items-center justify-center">
-                            {currentView === 'image' && (
-                                <Image
-                                    src="/image.png"
-                                    alt="Image Preview"
-                                    width={600}
-                                    height={800}
-                                    className="object-contain rounded w-full h-full"
-                                />
-                            )}
-                            {currentView === 'jpeg' && (
-                                <Image
-                                    src="/jatin.jpeg"
-                                    alt="JPEG Preview"
-                                    width={600}
-                                    height={800}
-                                    className="object-contain rounded w-full h-full"
-                                />
-                            )}
-                            {currentView === 'pdf' && (
-                                <iframe
-                                    src="/temp.pdf"
-                                    width="100%"
-                                    height="100%"
-                                    className="rounded border"
-                                ></iframe>
-                            )}
+                        <div className="w-[50%] h-[90%] flex items-center justify-center overflow-hidden">
+                            <div style={{ transform: `scale(${zoom})`, transformOrigin: 'center' }} className="w-full h-full flex items-center justify-center">
+                                {currentView === 'image' && (
+                                    <Image
+                                        src="/image.png"
+                                        alt="Image Preview"
+                                        width={600}
+                                        height={800}
+                                        className="object-contain rounded w-full h-full"
+                                    />
+                                )}
+                                {currentView === 'jpeg' && (
+                                    <Image
+                                        src="/jatin.jpeg"
+                                        alt="JPEG Preview"
+                                        width={600}
+                                        height={800}
+                                        className="object-contain rounded w-full h-full"
+                                    />
+                                )}
+                                {currentView === 'pdf' && (
+                                    <iframe
+                                        src="/temp.pdf"
+                                        width="100%"
+                                        height="100%"
+                                        className="rounded border"
+                                    ></iframe>
+                                )}
+                            </div>
                         </div>
-                    </div>
                     </div>
 
 
